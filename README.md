@@ -38,13 +38,7 @@ make
 
 ## Availible commands
 
-- jidlo: Decide which time is the bast for eating
-- ip: Show your IP addresses
-- date: Show today's date
-- alojz: Show weather forecast from https://alojz.cz/
-- weather: Currently the same as alojz
-- quit, exit, bye: Exit program
-- _default_: Answer from cleverbot
+See `$ help`
 
 ## Example running
 ```
