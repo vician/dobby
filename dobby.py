@@ -6,6 +6,7 @@ import sys
 from reactions.quit import Quit
 from reactions.todaydate import Todaydate
 from reactions.cleverbot import Cleverbot
+from reactions.alojz import Alojz
 
 class Dobby():
 
@@ -17,6 +18,7 @@ class Dobby():
         self.load_reaction("quit",Quit())
         self.load_reaction("cleverbot",Cleverbot())
         self.load_reaction("todaydate",Todaydate())
+        self.load_reaction("alojz",Alojz())
 
     def load_reaction(self,name,reaction_object):
         setattr(self,name,reaction_object)
