@@ -7,6 +7,7 @@ Dobby can currently use two TTS (Text-to-Speech)
 
 - [Epos](#epos)
 - [Google](#google)
+- [Festival](#festival)
 
 ### Epos
 
@@ -14,8 +15,26 @@ Official webpage: http://epos.ufe.cz/
 
 Installation:
 - Download epos from http://epos.ufe.cz/
+- Unpack
+- Build
+
+```
+wget "http://epos.ufe.cz/download/ep2-4-85.tgz"
+tar xvf ep2-4-85.tgz
+cd epos-2.4.85/src
+./configure
+make
+```
+
+#### Requirements
+
+- Ubuntu: `sudo apt install libpulse-dev`
 
 ### Google
+
+### Festival
+
+- Ubuntu: sudo apt install festival-czech
 
 ## Availible commands
 
