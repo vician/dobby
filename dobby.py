@@ -7,6 +7,7 @@ from reactions.quit import Quit
 from reactions.todaydate import Todaydate
 from reactions.cleverbot import Cleverbot
 from reactions.alojz import Alojz
+from reactions.ip import Ip
 
 class Dobby():
 
@@ -19,6 +20,7 @@ class Dobby():
         self.load_reaction("cleverbot",Cleverbot())
         self.load_reaction("todaydate",Todaydate())
         self.load_reaction("alojz",Alojz())
+        self.load_reaction("ip",Ip())
 
     def load_reaction(self,name,reaction_object):
         setattr(self,name,reaction_object)
@@ -37,7 +39,7 @@ class Dobby():
 
     def help(self,message):
         split = message.split()
-        if len(split) == 1:
+        if message == "" or len(split) == 1:
             self.say("Availible commands are: "+', '.join(self.list_reactions))
             self.say("Print help for command as: $ help command")
         else:
