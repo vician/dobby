@@ -10,11 +10,7 @@ from reactions.cleverbot import Cleverbot
 class Dobby():
 
     talker = None
-    # Reactions
-    cleverbot = None
-    todaydate = None
-    quit = None
-    #
+    
     list_reactions = []
 
     def __init__(self):
