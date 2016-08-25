@@ -5,10 +5,15 @@ from datetime import datetime # date
 import netifaces as ni # show_ip
 import random #jidlo
 
+import urllib3 # talker
+
 from reactions.Cleverbot import Cleverbot
 from reactions import lunchTime
+from reactions.talker import Talker
 
-def say(message):
+def say(message,talker=None):
+    if talker != None:
+        talker.addAndSayMessage(message)
     print(message)
 
 def show_ip():
@@ -48,7 +53,9 @@ def jidlo():
 
 if __name__ == '__main__':
 
-    say("Hi, I'm your house-elf Dobby. How can I help you?")
+    talker = Talker()
+    talker.useEpos()
+    say("Hi, I'm your house-elf Dobby. How can I help you?",talker)
 
     cleverbot = Cleverbot()
 

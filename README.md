@@ -1,4 +1,4 @@
-# dobby
+# Dobby
 Chatbot with additional functionality (originally for xmpp)
 
 ## Availible commands

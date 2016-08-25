@@ -74,7 +74,7 @@ class Talker(object):
             text = self.messages.pop(0)
             if(self.useGoogleT == True):
                 url = "http://translate.google.cz/translate_tts?ie=UTF-8&tl=" + self.googleLang + "&textlen=" + str(
-                    len(text)) + "&client=t&q=" + urllib.quote(text.encode('utf-8'))+"&ttsspeed=1.0"
+                    len(text)) + "&client=t&q=" + urllib.parse.quote(text.encode('utf-8'))+"&ttsspeed=1.0"
                 #https://translate.google.cz/translate_tts?ie=UTF-8&q=ahoj&tl=cs&total=1&idx=0&textlen=4&tk=303904&client=t&prev=input
                 #https://translate.google.cz/translate_tts?ie=UTF-8&q=ahoj%20zkus%20me%20precist&tl=cs&total=1&idx=0&textlen=20&tk=619507&client=t&prev=input&ttsspeed=0.24
                 #https://translate.google.cz/translate_tts?ie=UTF-8&q=ahoj&tl=cs&total=1&idx=0&textlen=4&tk=303904&client=t&prev=input&ttsspeed=0.24
