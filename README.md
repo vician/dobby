@@ -5,10 +5,10 @@ Chatbot with additional functionality (originally for xmpp)
 
 Dobby can currently use two TTS (Text-to-Speech)
 
-- [Epos](#Epos)
-- [Google](#Google)
+- [Epos](#epos)
+- [Google](#google)
 
-### EPOS
+### Epos
 
 Official webpage: http://epos.ufe.cz/
 
