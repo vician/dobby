@@ -6,15 +6,48 @@ import netifaces as ni # show_ip
 import random #jidlo
 
 import urllib3 # talker
+import urllib.request
+import bleach
 
 from reactions.Cleverbot import Cleverbot
 from reactions import lunchTime
 from reactions.talker import Talker
 
+try:
+    from bs4 import BeautifulSoup # available via pip as BeautifulSoup
+except ImportError:
+    from BeautifulSoup import BeautifulSoup
+
 def say(message,talker=None):
     if talker != None:
         talker.addAndSayMessage(message)
     print(message)
+
+def downloadURL(url):
+    """ 
+    Download url to string
+    """
+
+    response = urllib.request.urlopen(url)
+    data = response.read()      # a `bytes` object
+    text = data.decode('utf-8')
+    return text
+
+    #req = urllib3.Request(url)
+    #try:
+    #    response = urllib3.urlopen(req)
+    #except urllib3.HTTPError as e:
+    #    print('The server couldn\'t fulfill the request.')
+    #    print('Error code: ', e.code)
+    #    return -1
+    #except urllib3.URLError as e:
+    #    print('We failed to reach a server.')
+    #    print('Reason: ', e.reason)
+    #    return -2
+    #else:
+    #    html = response.read()
+    #    return html
+
 
 def show_ip():
     ifaces = ni.interfaces()
@@ -50,6 +83,14 @@ def jidlo():
         reply = 'Diky, zatim nemam hlad.'
     say(reply)
 
+def alojz():
+    page = downloadURL("https://alojz.cz/")
+    html = BeautifulSoup(page,"lxml")
+    h2 = html.body.find('h2', {"class" : "actual-forecast"}).text
+    reply = bleach.clean(h2)
+    reply = ' '.join(reply.split()) # Remove redundant whitspaces
+    say(reply)
+
 
 if __name__ == '__main__':
 
@@ -71,6 +112,10 @@ if __name__ == '__main__':
             show_ip()
         elif first == "jidlo":
             jidlo()
+        elif first == "alojz":
+            alojz()
+        elif first == "weather":
+            alojz()
         else:
             reply = cleverbot.ask(userinput)
             say(reply)
