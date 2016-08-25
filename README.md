@@ -1,6 +1,22 @@
 # Dobby
 Chatbot with additional functionality (originally for xmpp)
 
+## TTS
+
+Dobby can currently use two TTS (Text-to-Speech)
+
+- [Epos](#Epos)
+- [Google](#Google)
+
+### EPOS
+
+Official webpage: http://epos.ufe.cz/
+
+Installation:
+- Download epos from http://epos.ufe.cz/
+
+### Google
+
 ## Availible commands
 
 - jidlo: Decide which time is the bast for eating
