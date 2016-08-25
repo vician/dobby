@@ -4,6 +4,7 @@ import sys
 
 # TTS
 from tts.espeak import Espeak
+from tts.gtts import Gtts
 
 # Import reactions
 from reactions.quit import Quit
@@ -22,7 +23,7 @@ class Dobby():
 
     def __init__(self):
         # TTS
-        self.tts = Espeak()
+        self.tts = Gtts()
         # Reactions
         self.load_reaction("quit",Quit())
         self.load_reaction("cleverbot",Cleverbot())
