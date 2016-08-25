@@ -16,8 +16,10 @@ class Alojz(Reaction):
         self.downloader = Downloader()
         self.parser = Parser()
 
-    def do(self,message):
-        return self.weather(self.city)
+    def do(self,city=None):
+        if city is None or city == "":
+            city = self.city
+        return self.weather(city.lower())
 
     def weather(self,city):
         page = self.downloader.download("https://alojz.cz/"+city)

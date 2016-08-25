@@ -9,6 +9,7 @@ from reactions.cleverbot import Cleverbot
 from reactions.alojz import Alojz
 from reactions.ip import Ip
 from reactions.eat import Eat
+from reactions.youtube import Youtube
 
 class Dobby():
 
@@ -23,6 +24,7 @@ class Dobby():
         self.load_reaction("alojz",Alojz())
         self.load_reaction("ip",Ip())
         self.load_reaction("eat",Eat())
+        self.load_reaction("youtube",Youtube())
 
     def load_reaction(self,name,reaction_object):
         setattr(self,name,reaction_object)
@@ -63,13 +65,17 @@ class Dobby():
             userinput = sys.stdin.readline().rstrip('\n')
             # Get first word
             first = userinput.partition(' ')[0]
+            if first != userinput:
+                rest = userinput.split(' ', 1)[1]
+            else:
+                rest = ""
             # Parse commands
             if first == '' or first == 'help':
                 self.help(userinput)
             else:
                 # If reaction loaded
                 if hasattr(self,first):
-                    self.say(getattr(self,first).do(userinput))
+                    self.say(getattr(self,first).do(rest))
                 else:
                     # Cleverbot is default
                     self.say(self.cleverbot.do(userinput))
