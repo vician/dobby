@@ -53,6 +53,7 @@ if __name__ == '__main__':
     cleverbot = Cleverbot()
 
     while True:
+        print ("$ ", end="", flush=True)
         userinput = sys.stdin.readline().rstrip('\n')
         first = userinput.partition(' ')[0]
         if first == 'quit':
