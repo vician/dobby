@@ -17,9 +17,14 @@ See `$ help`
 
 Dobby can currently use two TTS (Text-to-Speech)
 
+- [Espeak](#espeak)
 - [Epos](#epos)
 - [Google](#google)
 - [Festival](#festival)
+
+### Espeak
+
+Install `python3-espeak` package.
 
 ### Epos
 
