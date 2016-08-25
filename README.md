@@ -1,6 +1,18 @@
 # Dobby
 Chatbot with additional functionality (originally for xmpp)
 
+## Availible commands
+
+See `$ help`
+
+### Write new module
+
+- See `reactions/example.py`
+- Preapre your module as `reactions/yourmodule.py`
+- Content has to be as in `reactions/example.py` with your changes
+- Include your module to Dobbby `from reactions.yourmodule import Yourmodule
+- Add loading to `__init__` of `Dobby`: `self.load\_reaction("yourmodule",Yourmodule())`
+
 ## TTS
 
 Dobby can currently use two TTS (Text-to-Speech)
@@ -36,9 +48,6 @@ make
 
 - Ubuntu: sudo apt install festival-czech
 
-## Availible commands
-
-See `$ help`
 
 ## Example running
 ```
