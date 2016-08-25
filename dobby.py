@@ -18,10 +18,20 @@ try:
 except ImportError:
     from BeautifulSoup import BeautifulSoup
 
+
 def say(message,talker=None):
     if talker != None:
         talker.addAndSayMessage(message)
     print(message)
+
+def help(command=None):
+    if command == None or command == 'help':
+        say("Availible commands: ...")
+    second = command.split()[1]
+    if second == 'quit':
+        say("I will quit after this!")
+    else:
+        say("Help for this command not found!")
 
 def downloadURL(url):
     """ 
@@ -104,7 +114,9 @@ if __name__ == '__main__':
         print ("$ ", end="", flush=True)
         userinput = sys.stdin.readline().rstrip('\n')
         first = userinput.partition(' ')[0]
-        if first == 'quit' or first == 'exit' or first == 'bye':
+        if first == '' or first == 'help':
+            help(userinput)
+        elif first == 'quit' or first == 'exit' or first == 'bye':
             break
         elif first == "date":
             say("Today is "+datetime.now().strftime('%Y-%m-%d'))
