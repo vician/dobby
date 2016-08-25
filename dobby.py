@@ -1,135 +1,77 @@
 #!/usr/bin/env python3
 
 import sys
-from datetime import datetime # date
-import netifaces as ni # show_ip
-import random #jidlo
 
-import urllib3 # talker
-import urllib.request
-import bleach
+# Import reactions
+from reactions.quit import Quit
+from reactions.todaydate import Todaydate
+from reactions.cleverbot import Cleverbot
 
-from reactions.Cleverbot import Cleverbot
-from reactions import lunchTime
-from reactions.talker import Talker
+class Dobby():
 
-try:
-    from bs4 import BeautifulSoup # available via pip as BeautifulSoup
-except ImportError:
-    from BeautifulSoup import BeautifulSoup
+    talker = None
+    # Reactions
+    cleverbot = None
+    todaydate = None
+    quit = None
+    #
+    list_reactions = []
 
+    def __init__(self):
+        self.load_reaction("quit",Quit())
+        self.load_reaction("cleverbot",Cleverbot())
+        self.load_reaction("todaydate",Todaydate())
 
-def say(message,talker=None):
-    if talker != None:
-        talker.addAndSayMessage(message)
-    print(message)
+    def load_reaction(self,name,reaction_object):
+        setattr(self,name,reaction_object)
+        self.list_reactions.append(name)
+        for alias in getattr(self,name).get_aliasses():
+            self.alias(alias, getattr(self,name))
 
-def help(command=None):
-    if command == None or command == 'help':
-        say("Availible commands: ...")
-    second = command.split()[1]
-    if second == 'quit':
-        say("I will quit after this!")
-    else:
-        say("Help for this command not found!")
+    def alias(self,alias,alias_reaction):
+        self.list_reactions.append(alias)
+        setattr(self,alias,alias_reaction)
 
-def downloadURL(url):
-    """ 
-    Download url to string
-    """
+    def say(self,message):
+        if self.talker != None:
+            talker.say(message)
+        print(message)
 
-    response = urllib.request.urlopen(url)
-    data = response.read()      # a `bytes` object
-    text = data.decode('utf-8')
-    return text
-
-    #req = urllib3.Request(url)
-    #try:
-    #    response = urllib3.urlopen(req)
-    #except urllib3.HTTPError as e:
-    #    print('The server couldn\'t fulfill the request.')
-    #    print('Error code: ', e.code)
-    #    return -1
-    #except urllib3.URLError as e:
-    #    print('We failed to reach a server.')
-    #    print('Reason: ', e.reason)
-    #    return -2
-    #else:
-    #    html = response.read()
-    #    return html
-
-
-def show_ip():
-    ifaces = ni.interfaces()
-    reply = "My IPs are:"
-
-    for iface in ifaces:
-        ni.ifaddresses(iface)
-        ip4 = ni.ifaddresses(iface)[2][0]['addr']
-        ip6 = ni.ifaddresses(iface)[10][0]['addr']
-        reply += "\n{}: {}".format(str(iface), str(ip4))
-        reply += "\n{}: {}".format(str(iface), str(ip6))
-
-    say(reply)
-
-def jidlo():
-    """Dobby says at what time my masters eat today."""
-    tmp = random.randint(0, 11)
-
-    if(tmp <= 7):
-        cas = lunchTime.getLunchTimeNow(59)
-        if(cas == False):
-            reply = 'ERROR: getLunchTimeFromNow'
+    def help(self,message):
+        split = message.split()
+        if len(split) == 1:
+            self.say("Availible commands are: "+', '.join(self.list_reactions))
+            self.say("Print help for command as: $ help command")
         else:
-            reply = "OK, takze jidlo bude presne v "+cas
+            command = split[1]
+            if len(split) >= 3:
+                argument = split[2]
+            else:
+                argument = ""
+            if hasattr(self,command):
+                self.say(getattr(self,command).get_help(argument))
+            else:
+                self.say("Help for "+command+" not found!")
 
-    if(tmp == 8):
-        reply = 'Vsechno bude, neboj!'
-    if(tmp == 9):
-        reply = 'Bezte si zrat kdy chcete!'
-    if(tmp == 10):
-        reply = 'Jidlo, jidlo? Makat se bude!'
-    if(tmp == 11):
-        reply = 'Diky, zatim nemam hlad.'
-    say(reply)
+    def listen(self):
+        
+        while True:
+            print ("$ ", end="", flush=True)
+            # Load user input
+            userinput = sys.stdin.readline().rstrip('\n')
+            # Get first word
+            first = userinput.partition(' ')[0]
+            # Parse commands
+            if first == '' or first == 'help':
+                self.help(userinput)
+            else:
+                # If reaction loaded
+                if hasattr(self,first):
+                    self.say(getattr(self,first).do(userinput))
+                else:
+                    # Cleverbot is default
+                    self.say(self.cleverbot.do(userinput))
 
-def alojz():
-    page = downloadURL("https://alojz.cz/")
-    html = BeautifulSoup(page,"lxml")
-    h2 = html.body.find('h2', {"class" : "actual-forecast"}).text
-    reply = bleach.clean(h2)
-    reply = ' '.join(reply.split()) # Remove redundant whitspaces
-    say(reply)
 
-
-if __name__ == '__main__':
-
-    talker = Talker()
-    talker.useEpos()
-    say("Hi, I'm your house-elf Dobby. How can I help you?",talker)
-
-    cleverbot = Cleverbot()
-
-    while True:
-        print ("$ ", end="", flush=True)
-        userinput = sys.stdin.readline().rstrip('\n')
-        first = userinput.partition(' ')[0]
-        if first == '' or first == 'help':
-            help(userinput)
-        elif first == 'quit' or first == 'exit' or first == 'bye':
-            break
-        elif first == "date":
-            say("Today is "+datetime.now().strftime('%Y-%m-%d'))
-        elif first == "ip":
-            show_ip()
-        elif first == "jidlo":
-            jidlo()
-        elif first == "alojz":
-            alojz()
-        elif first == "weather":
-            alojz()
-        else:
-            reply = cleverbot.ask(userinput)
-            say(reply)
-
-    say("Yes, master. I'm going to sleep.")
+dobby = Dobby()
+dobby.listen()
