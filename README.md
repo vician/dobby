@@ -41,6 +41,7 @@ make
 - jidlo: Decide which time is the bast for eating
 - ip: Show your IP addresses
 - date: Show today's date
+- quit, exit, bye: Exit program
 - _default_: Answer from cleverbot
 
 ## Example running

@@ -63,7 +63,7 @@ if __name__ == '__main__':
         print ("$ ", end="", flush=True)
         userinput = sys.stdin.readline().rstrip('\n')
         first = userinput.partition(' ')[0]
-        if first == 'quit':
+        if first == 'quit' or first == 'exit' or first == 'bye':
             break
         elif first == "date":
             say("Today is "+datetime.now().strftime('%Y-%m-%d'))
