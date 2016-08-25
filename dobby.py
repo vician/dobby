@@ -2,6 +2,9 @@
 
 import sys
 
+# TTS
+from tts.espeak import Espeak
+
 # Import reactions
 from reactions.quit import Quit
 from reactions.todaydate import Todaydate
@@ -13,11 +16,14 @@ from reactions.youtube import Youtube
 
 class Dobby():
 
-    talker = None
+    tts = None
     
     list_reactions = []
 
     def __init__(self):
+        # TTS
+        self.tts = Espeak()
+        # Reactions
         self.load_reaction("quit",Quit())
         self.load_reaction("cleverbot",Cleverbot())
         self.load_reaction("todaydate",Todaydate())
@@ -37,8 +43,8 @@ class Dobby():
         setattr(self,alias,alias_reaction)
 
     def say(self,message):
-        if self.talker != None:
-            talker.say(message)
+        if self.tts != None:
+            self.tts.say(message)
         print(message)
 
     def help(self,message):

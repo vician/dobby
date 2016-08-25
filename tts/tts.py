@@ -1,4 +1,4 @@
-class Talker():
+class Tts():
     ''' Base class for talkers. '''
 
     language = "English"
