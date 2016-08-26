@@ -5,7 +5,7 @@ class Cleverbot(Reaction):
 
     help = "Answers from cleverbot"
 
-    def __init__(self):
+    def init(self):
         self.__bot = cleverbot.Cleverbot()
 
     def do(self,message):

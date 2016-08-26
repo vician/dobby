@@ -7,6 +7,7 @@ from tts.gtts import Gtts
 
 # Import reactions
 from reactions.quit import Quit
+from reactions.config import Config
 from reactions.todaydate import Todaydate
 from reactions.cleverbot import Cleverbot
 from reactions.alojz import Alojz
@@ -25,6 +26,7 @@ class Dobby():
         self.tts = Gtts()
         # Reactions
         self.load_reaction("quit",Quit())
+        self.load_reaction("config",Config())
         self.load_reaction("cleverbot",Cleverbot())
         self.load_reaction("todaydate",Todaydate())
         self.load_reaction("alojz",Alojz())
@@ -78,6 +80,10 @@ class Dobby():
             # Parse commands
             if first == '' or first == 'help':
                 self.help(userinput)
+            if first == 'config':
+                name_reaction = self.config.get_reaction(rest)
+                if hasattr(self,name_reaction):
+                    self.config.set(rest,getattr(self,name_reaction))
             else:
                 # If reaction loaded
                 if hasattr(self,first):

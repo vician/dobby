@@ -1,6 +1,7 @@
 from reactions.reaction import Reaction
 
 import pafy
+import youtube_dl
 
 from helpers.mplayer import Mplayer
 
@@ -11,7 +12,7 @@ class Youtube(Reaction):
 
     mplayer = None
 
-    def __init__(self):
+    def init(self):
         self.mplayer = Mplayer()
 
     def do(self,message):

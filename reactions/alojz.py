@@ -7,18 +7,22 @@ class Alojz(Reaction):
     help = "Weather forecast from https://alojz.cz - only in czech!\nRun: $ alojz [city=praha]"
     aliasses = [ "weather" ]
 
-    # Default city
-    city = "praha"
     downloader = None
     parser = None
 
-    def __init__(self):
+    def init(self):
         self.downloader = Downloader()
         self.parser = Parser()
+        # Default values
+        self.ini.set("city","praha")
+
+    def parameters_init(self):
+        self.parameters = Class()
+        self.parameters.city = "praha"
 
     def do(self,city=None):
         if city is None or city == "":
-            city = self.city
+            city = self.ini.get("city")
         return self.weather(city.lower())
 
     def weather(self,city):
