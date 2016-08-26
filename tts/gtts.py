@@ -5,25 +5,20 @@ import tempfile
 import os
 
 from helpers.mplayer import Mplayer
+from helpers.language import Language
 
 class Gtts(Tts):
 
-    attributes = [ "lang", "disabled" ]
-
-    def init(self):
+    def tts_init(self):
         self.mplayer = Mplayer()
-        self.ini.set("lang","en")
-        self.ini.set("disabled","0")
+        self.language = Language()
 
-    def say(self,message):
-        if self.ini.get("disabled") != "1":
-            if isinstance(message, str) and len(message) > 0:
-                audio_file = tempfile.mktemp()
-                tts = gTTS(text=message, lang=self.ini.get("lang"))
-                tts.save(audio_file)
-                self.mplayer.play(audio_file)
+    def tts_say(self,message):
+        audio_file = tempfile.mktemp()
+        tts = gTTS(text=message, lang=self.language.to_short(self.ini.get("language")))
+        tts.save(audio_file)
+        self.mplayer.play(audio_file)
 
-    def do(self,message=None):
-        if message == "stop" or message == "quiet":
-            self.mplayer.stop()
-        return ""
+    def stop(self):
+        self.mplayer.stop()
+

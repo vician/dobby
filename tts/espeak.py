@@ -4,5 +4,5 @@ from espeak import espeak
 
 class Espeak(Tts):
 
-    def say(self,message):
+    def tts_say(self,message):
         espeak.synth(message)
