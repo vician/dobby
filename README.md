@@ -10,6 +10,15 @@ See `$ help`
 - See `reactions/example.py`
 - Preapre your module as `reactions/yourmodule.py`
 - Content has to be as in `reactions/example.py` with your changes
+- Do not forget to:
+	- rename *class name*
+	- write help
+	- specify aliasses (the first is used as section in dobby.ini file)
+	- specify attributes
+	- do not use `__init__()` but use `init()` instead of it
+	- inicialize attributes in `init()`
+	- write your behaviour in `do()`
+	- use `self.ini.get()` for all attributes
 - Include your module to Dobbby `from reactions.yourmodule import Yourmodule`
 - Add loading to `__init__` of `Dobby`: `self.load_reaction(Yourmodule())`
 
@@ -46,6 +55,19 @@ make
 #### Requirements
 
 - Ubuntu: `sudo apt install libpulse-dev`
+
+### Writing new TTS
+
+- See `tts/example.py`
+- Preapre your tts as `tts/yourtts.py`
+- Content has to be as in `tts/example.py` with your changes
+- Do not forget to:
+	- rename *class name*
+	- do not use `__init__()` or `init()` but use `tts_init()` instead of them
+	- write your behaviour in `tts_say()`
+	- use `helpers.language` for getting language code or name (see `tts/gtts.py`)
+	- use `helpers.mplayer` if you need some media player
+
 
 ### Google
 
