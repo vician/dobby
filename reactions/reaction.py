@@ -26,3 +26,6 @@ class Reaction():
 
     def ini_set(self,name,value):
         self.ini.set(name,value)
+
+    def get_name(self):
+        return self.aliasses[0]

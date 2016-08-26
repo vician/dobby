@@ -3,6 +3,7 @@ from reactions.reaction import Reaction
 class Config(Reaction): # Change name of this class!
 
     help = "Config other reactions!"
+    aliasses = [ "config" ]
 
     def get_reaction(self,message):
         first = message.partition(' ')[0]

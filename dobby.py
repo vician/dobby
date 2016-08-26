@@ -21,23 +21,28 @@ class Dobby():
     tts = None
     
     list_reactions = []
+    reactions = []
+
+    count_reactions = 0
 
     def __init__(self):
         # TTS
-        self.tts = Gtts()
+        self.tts = None
         # Reactions
-        self.load_reaction("quit",Quit())
-        self.load_reaction("config",Config())
-        self.load_reaction("cleverbot",Cleverbot())
-        self.load_reaction("todaydate",Todaydate())
-        self.load_reaction("alojz",Alojz())
-        self.load_reaction("ip",Ip())
-        self.load_reaction("eat",Eat())
-        self.load_reaction("youtube",Youtube())
-        self.load_reaction("read",Read())
+        self.load_reaction(Quit())
+        self.load_reaction(Config())
+        self.load_reaction(Cleverbot())
+        self.load_reaction(Todaydate())
+        self.load_reaction(Alojz())
+        self.load_reaction(Ip())
+        self.load_reaction(Eat())
+        self.load_reaction(Youtube())
+        self.load_reaction(Read())
 
-    def load_reaction(self,name,reaction_object):
+    def load_reaction(self,reaction_object):
+        name = "reaction"+str(self.count_reactions)
         setattr(self,name,reaction_object)
+        self.count_reactions += 1
         self.list_reactions.append(name)
         for alias in getattr(self,name).get_aliasses():
             self.alias(alias, getattr(self,name))

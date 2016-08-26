@@ -5,7 +5,7 @@ from helpers.parser import Parser
 
 class Alojz(Reaction):
     help = "Weather forecast from https://alojz.cz - only in czech!\nRun: $ alojz [city=praha]"
-    aliasses = [ "weather" ]
+    aliasses = [ "alojz", "weather" ]
 
     downloader = None
     parser = None

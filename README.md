@@ -10,8 +10,8 @@ See `$ help`
 - See `reactions/example.py`
 - Preapre your module as `reactions/yourmodule.py`
 - Content has to be as in `reactions/example.py` with your changes
-- Include your module to Dobbby `from reactions.yourmodule import Yourmodule
-- Add loading to `__init__` of `Dobby`: `self.load_reaction("yourmodule",Yourmodule())`
+- Include your module to Dobbby `from reactions.yourmodule import Yourmodule`
+- Add loading to `__init__` of `Dobby`: `self.load_reaction(Yourmodule())`
 
 ## TTS
 

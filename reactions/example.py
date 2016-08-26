@@ -4,7 +4,7 @@ from reactions.reaction import Reaction
 class Example(Reaction): # Change name of this class!
 
     help = "Here write information about this module!"
-    aliasses = [ "sample" ] # Additionaly choose alias, or remove this variable
+    aliasses = [ "example" ]
 
     def init(self):
         # Your init function. Do not use __init__!!!

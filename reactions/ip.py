@@ -5,6 +5,7 @@ import netifaces as ni
 class Ip(Reaction): # Change name of this class!
 
     help = "Show IP addresses on network interfaces."
+    aliasses = [ "ip" ]
 
     def do(self,message):
         ifaces = ni.interfaces()

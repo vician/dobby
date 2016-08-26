@@ -6,7 +6,7 @@ import datetime
 class Eat(Reaction):
 
     help = "When I should eat?"
-    aliasses = [ "lunch" ]
+    aliasses = [ "eat", "lunch" ]
 
     def do(self,message):
         tmp = random.randint(0, 11) 
