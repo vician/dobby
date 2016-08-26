@@ -1,4 +1,4 @@
-class Language()
+class Language():
 
     def to_short(self,long_name):
         long_name = long_name.lower()
