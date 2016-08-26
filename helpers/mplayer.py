@@ -16,7 +16,7 @@ class Mplayer():
     def play(self,audio_file):
         if len(audio_file) > 0:
             if threading.active_count() <= 1:
-                self.playThread = threading.Thrread(target=self.thread)
+                self.playThread = threading.Thread(target=self.thread)
                 self.playThread.start()
 
     def stop(self):
