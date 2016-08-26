@@ -13,7 +13,13 @@ class Gtts(Tts):
         self.ini.set("lang","en")
 
     def say(self,message):
-        audio_file = tempfile.mktemp()
-        tts = gTTS(text=message, lang=self.ini.get("lang"))
-        tts.save(audio_file)
-        self.mplayer.play(audio_file)
+        if len(message) > 0:
+            audio_file = tempfile.mktemp()
+            tts = gTTS(text=message, lang=self.ini.get("lang"))
+            tts.save(audio_file)
+            self.mplayer.play(audio_file)
+
+    def do(self,message=None):
+        if message == "stop" or message == "quiet":
+            self.mplayer.stop()
+        return ""
