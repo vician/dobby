@@ -17,7 +17,13 @@ class Reaction():
         pass
 
     def get_help(self,command=None):
-        return self.help
+        reply = "Help for "+self.get_name()
+        reply += "\n- aliasses: "+self.print_aliasses()
+        reply += "\n- attributes: "+self.print_attributes()
+        return reply+"\n"+self.help
+
+    def print_aliasses(self):
+        return ', '.join(self.get_aliasses())
 
     def get_aliasses(self):
         return self.aliasses

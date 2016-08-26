@@ -74,13 +74,10 @@ class Dobby():
         name = "reaction"+str(self.count_reactions)
         setattr(self,name,reaction_object)
         self.count_reactions += 1
-        self.list_reactions.append(getattr(self,name).get_name())
+        real_name = getattr(self,name).get_name()
+        self.list_reactions.append(real_name)
         for alias in getattr(self,name).get_aliasses():
-            self.alias(name,alias, getattr(self,name))
-
-    def alias(self,name,alias,alias_reaction):
-        self.list_aliasses.append(name+" = "+alias)
-        setattr(self,alias,alias_reaction)
+            setattr(self,alias,getattr(self,name))
 
     def say(self,message):
         if self.tts != None:

@@ -1,7 +1,7 @@
 from reactions.reaction import Reaction
 
 class Wunderground(Reaction):
-    help = "Weather forecast from https://alojz.cz - only in czech!\nRun: $ alojz [city=praha]"
+    help = "Weather forecast from wunderground api.\nRun: $ wunderground [city=praha]"
     aliasses = [ "wunderground", "pywu", "weather" ]
 
     attributes = [ "api", "city" ]
