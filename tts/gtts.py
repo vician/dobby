@@ -10,4 +10,4 @@ class Gtts(Tts):
         audio_file = tempfile.mktemp()
         tts = gTTS(text=message, lang="en")
         tts.save(audio_file)
-        return_code = subprocess.call(["mplayer", audio_file])
+        return_code = subprocess.call(["mplayer", "-really-quiet", audio_file])
