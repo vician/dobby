@@ -11,7 +11,7 @@ class Mplayer():
 
     def thread(self):
         if len(self.audio_file) > 0:
-            args = [ "mplayer", "-really-quiet", self.audio_file]
+            args = [ "mplayer", self.audio_file]
             subprocess.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
 
     def play(self,audio_file):

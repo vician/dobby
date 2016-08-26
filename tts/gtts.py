@@ -18,4 +18,3 @@ class Gtts(Tts):
         tts = gTTS(text=message, lang="en")
         tts.save(audio_file)
         self.mplayer.play(audio_file)
-        os.remove(audio_file)
