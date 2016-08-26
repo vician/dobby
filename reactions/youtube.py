@@ -8,7 +8,7 @@ from helpers.mplayer import Mplayer
 class Youtube(Reaction):
 
     help = "Simple playing audio from youtube."
-    aliasses = [ "youtube" "yt" ]
+    aliasses = [ "youtube", "yt" ]
 
     mplayer = None
 

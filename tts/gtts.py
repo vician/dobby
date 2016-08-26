@@ -13,7 +13,7 @@ class Gtts(Tts):
         self.ini.set("lang","en")
 
     def say(self,message):
-        if len(message) > 0:
+        if message != None and len(message) > 0:
             audio_file = tempfile.mktemp()
             tts = gTTS(text=message, lang=self.ini.get("lang"))
             tts.save(audio_file)

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
+import configparser
 
 # TTS
 from tts.gtts import Gtts
@@ -21,13 +22,16 @@ class Dobby():
     tts = None
     
     list_reactions = []
+    list_aliasses = []
     reactions = []
 
     count_reactions = 0
 
+    config_ini = None
+
     def __init__(self):
         # TTS
-        self.tts = None
+        self.tts = Gtts()
         # Reactions
         self.load_reaction(Quit())
         self.load_reaction(Config())
@@ -39,16 +43,39 @@ class Dobby():
         self.load_reaction(Youtube())
         self.load_reaction(Read())
 
+        self.config_ini = configparser.ConfigParser()
+
+        self.load_ini()
+
+    def load_ini(self):
+        self.config_ini.read("dobby.ini")
+
+        for section in self.config_ini.sections():
+            for variable in self.config_ini[section]:
+                getattr(self,section).ini_set(variable,self.config_ini[section][variable])
+
+    def save_ini(self):
+        new_config_ini = configparser.ConfigParser()
+
+        self.tts.save_ini(new_config_ini)
+
+        for reaction in self.list_reactions:
+            getattr(self,reaction).save_ini(new_config_ini)
+
+
+        configfile = open('dobby.ini', 'w')
+        new_config_ini.write(configfile)
+
     def load_reaction(self,reaction_object):
         name = "reaction"+str(self.count_reactions)
         setattr(self,name,reaction_object)
         self.count_reactions += 1
         self.list_reactions.append(name)
         for alias in getattr(self,name).get_aliasses():
-            self.alias(alias, getattr(self,name))
+            self.alias(name,alias, getattr(self,name))
 
-    def alias(self,alias,alias_reaction):
-        self.list_reactions.append(alias)
+    def alias(self,name,alias,alias_reaction):
+        self.list_aliasses.append(name+" = "+alias)
         setattr(self,alias,alias_reaction)
 
     def say(self,message):
@@ -86,6 +113,8 @@ class Dobby():
             # Parse commands
             if first == '' or first == 'help':
                 self.help(userinput)
+            elif first == 'save':
+                self.save_ini()
             elif first == 'config':
                 name_reaction = self.config.get_reaction(rest)
                 if hasattr(self,name_reaction):

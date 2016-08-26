@@ -29,3 +29,6 @@ class Reaction():
 
     def get_name(self):
         return self.aliasses[0]
+
+    def save_ini(self,config):
+        self.ini.save(config,self.get_name())
