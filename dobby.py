@@ -14,6 +14,7 @@ from reactions.alojz import Alojz
 from reactions.ip import Ip
 from reactions.eat import Eat
 from reactions.youtube import Youtube
+from reactions.read import Read
 
 class Dobby():
 
@@ -33,6 +34,7 @@ class Dobby():
         self.load_reaction("ip",Ip())
         self.load_reaction("eat",Eat())
         self.load_reaction("youtube",Youtube())
+        self.load_reaction("read",Read())
 
     def load_reaction(self,name,reaction_object):
         setattr(self,name,reaction_object)
@@ -52,8 +54,7 @@ class Dobby():
     def help(self,message):
         split = message.split()
         if message == "" or len(split) == 1:
-            self.say("Availible commands are: "+', '.join(self.list_reactions))
-            self.say("Print help for command as: $ help command")
+            self.say("Availible commands are: "+', '.join(self.list_reactions)+"\nPrint help for command as: $ help command")
         else:
             command = split[1]
             if len(split) >= 3:
@@ -80,7 +81,7 @@ class Dobby():
             # Parse commands
             if first == '' or first == 'help':
                 self.help(userinput)
-            if first == 'config':
+            elif first == 'config':
                 name_reaction = self.config.get_reaction(rest)
                 if hasattr(self,name_reaction):
                     self.say(self.config.set(rest,getattr(self,name_reaction)))
