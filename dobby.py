@@ -16,6 +16,7 @@ from reactions.ip import Ip
 from reactions.eat import Eat
 from reactions.youtube import Youtube
 from reactions.read import Read
+from reactions.wunderground import Wunderground
 
 class Dobby():
 
@@ -42,6 +43,7 @@ class Dobby():
         self.load_reaction(Eat())
         self.load_reaction(Youtube())
         self.load_reaction(Read())
+        self.load_reaction(Wunderground())
 
         self.config_ini = configparser.ConfigParser()
 

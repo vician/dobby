@@ -1,22 +1,18 @@
 from reactions.reaction import Reaction
 
-from helpers.downloader import Downloader
-from helpers.parser import Parser
-
-class Alojz(Reaction):
+class Wunderground(Reaction):
     help = "Weather forecast from https://alojz.cz - only in czech!\nRun: $ alojz [city=praha]"
-    aliasses = [ "alojz" ]
+    aliasses = [ "wunderground", "pywu", "weather" ]
 
-    attributes = [ "city" ]
+    attributes = [ "api", "city" ]
 
     downloader = None
     parser = None
 
     def init(self):
-        self.downloader = Downloader()
-        self.parser = Parser()
         # Default values
-        self.ini.set("city","praha")
+        self.ini.set("city","Prague")
+        self.ini.set("api","-")
  
     def do(self,city=None):
         if city is None or city == "":
@@ -24,6 +20,4 @@ class Alojz(Reaction):
         return self.weather(city.lower())
 
     def weather(self,city):
-        page = self.downloader.download("https://alojz.cz/"+city)
-
-        return self.parser.parse_class(page,"h2","actual-forecast")
+        return "preparing"

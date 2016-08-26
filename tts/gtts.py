@@ -17,7 +17,7 @@ class Gtts(Tts):
 
     def say(self,message):
         if self.ini.get("disabled") != "1":
-            if message is str and len(message) > 0:
+            if isinstance(message, str) and len(message) > 0:
                 audio_file = tempfile.mktemp()
                 tts = gTTS(text=message, lang=self.ini.get("lang"))
                 tts.save(audio_file)
