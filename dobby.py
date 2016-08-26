@@ -70,7 +70,7 @@ class Dobby():
         name = "reaction"+str(self.count_reactions)
         setattr(self,name,reaction_object)
         self.count_reactions += 1
-        self.list_reactions.append(name)
+        self.list_reactions.append(getattr(self,name).get_name())
         for alias in getattr(self,name).get_aliasses():
             self.alias(name,alias, getattr(self,name))
 
