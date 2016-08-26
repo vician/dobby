@@ -5,11 +5,12 @@ class Reaction():
 
     help = ""
     aliasses = []
+    attributes = []
 
     ini = None
 
     def __init__(self):
-        self.ini = Ini()
+        self.ini = Ini(self.attributes)
         self.init()
 
     def init(self):
@@ -32,3 +33,6 @@ class Reaction():
 
     def save_ini(self,config):
         self.ini.save(config,self.get_name())
+
+    def print_attributes(self):
+        return ', '.join(self.attributes)

@@ -4,12 +4,16 @@ class Ini():
     
     attributes = []
     
-    def __init__(self):
-        pass
+    def __init__(self,attributes):
+        self.attributes = attributes
 
     def set(self,name,value):
-        setattr(self,name,value)
-        self.attributes.append(name)
+
+        if name in self.attributes:
+            setattr(self,name,value)
+        else:
+            print("ERROR: "+name+" is not valid attribute!")
+            print("Valid is: "+', '.join(self.attributes))
 
     def get(self,name):
         if hasattr(self,name):

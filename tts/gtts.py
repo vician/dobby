@@ -8,6 +8,8 @@ from helpers.mplayer import Mplayer
 
 class Gtts(Tts):
 
+    attributes = [ "lang", "disabled" ]
+
     def init(self):
         self.mplayer = Mplayer()
         self.ini.set("lang","en")

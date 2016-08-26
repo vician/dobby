@@ -15,6 +15,7 @@ class Config(Reaction): # Change name of this class!
             return target_reaction.ini.get(values[1])
 
         if len(values) < 3:
+            return target_reaction.print_attributes()
             return "Wrong usage! See help!"
 
         reaction = values[0]
