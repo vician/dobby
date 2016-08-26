@@ -1,10 +1,7 @@
-class Tts():
-    ''' Base class for talkers. '''
+from reactions.reaction import Reaction
 
-    language = "English"
-
-    def __init__(self):
-        pass
+class Tts(Reaction):
+    ''' Base class for TTS. '''
 
     def say(self,message):
         pass

@@ -8,13 +8,12 @@ from helpers.mplayer import Mplayer
 
 class Gtts(Tts):
 
-    mplayer = None
-
-    def __init__(self):
+    def init(self):
         self.mplayer = Mplayer()
+        self.ini.set("lang","en")
 
     def say(self,message):
         audio_file = tempfile.mktemp()
-        tts = gTTS(text=message, lang="en")
+        tts = gTTS(text=message, lang=self.ini.get("lang"))
         tts.save(audio_file)
         self.mplayer.play(audio_file)

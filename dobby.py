@@ -83,7 +83,7 @@ class Dobby():
             if first == 'config':
                 name_reaction = self.config.get_reaction(rest)
                 if hasattr(self,name_reaction):
-                    self.config.set(rest,getattr(self,name_reaction))
+                    self.say(self.config.set(rest,getattr(self,name_reaction)))
             else:
                 # If reaction loaded
                 if hasattr(self,first):

@@ -10,6 +10,9 @@ class Config(Reaction): # Change name of this class!
 
     def set(self,message,target_reaction):
         values = message.split(' ')
+        if len(values) == 2:
+            return target_reaction.ini.get(values[1])
+
         if len(values) < 3:
             return "Wrong usage! See help!"
 
