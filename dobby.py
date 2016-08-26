@@ -3,7 +3,6 @@
 import sys
 
 # TTS
-from tts.espeak import Espeak
 from tts.gtts import Gtts
 
 # Import reactions
