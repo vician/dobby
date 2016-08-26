@@ -1,7 +1,6 @@
 from tts.tts import Tts
 
 from gtts import gTTS
-import subprocess
 import tempfile
 import os
 
@@ -18,6 +17,5 @@ class Gtts(Tts):
         audio_file = tempfile.mktemp()
         tts = gTTS(text=message, lang="en")
         tts.save(audio_file)
-        #return_code = subprocess.call(["mplayer", "-really-quiet", audio_file])
         self.mplayer.play(audio_file)
         os.remove(audio_file)
