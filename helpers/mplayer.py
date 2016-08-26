@@ -18,11 +18,12 @@ class Mplayer():
         if len(audio_file) > 0:
             self.audio_file = audio_file
             if threading.active_count() <= 1:
+                self.stop() # Should be disabled for youtube?
                 self.playThread = threading.Thread(target=self.thread)
                 self.playThread.start()
 
     def stop(self):
         if self.playThread is not None:
-            subprocess.call(["killall", "mplayer"])
+            subprocess.call(["killall", "mplayer"], stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
             self.playThread.join()
             self.playThread = None
