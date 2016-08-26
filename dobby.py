@@ -17,6 +17,7 @@ from reactions.eat import Eat
 from reactions.youtube import Youtube
 from reactions.read import Read
 from reactions.wunderground import Wunderground
+from reactions.time import Time
 
 class Dobby():
 
@@ -44,6 +45,7 @@ class Dobby():
         self.load_reaction(Youtube())
         self.load_reaction(Read())
         self.load_reaction(Wunderground())
+        self.load_reaction(Time())
 
         self.config_ini = configparser.ConfigParser()
 
