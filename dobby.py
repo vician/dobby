@@ -6,6 +6,10 @@ import configparser
 # TTS
 from tts.gtts import Gtts
 
+# Stt
+
+from stt.sr import SpeechRecognition
+
 # Import reactions
 from reactions.quit import Quit
 from reactions.config import Config
@@ -22,6 +26,7 @@ from reactions.time import Time
 class Dobby():
 
     tts = None
+    stt = None
     
     list_reactions = []
     list_aliasses = []
@@ -34,6 +39,8 @@ class Dobby():
     def __init__(self):
         # TTS
         self.tts = Gtts()
+        # STT
+        self.stt = SpeechRecognition()
         # Reactions
         self.load_reaction(Quit())
         self.load_reaction(Config())
@@ -104,7 +111,10 @@ class Dobby():
         while True:
             print ("$ ", end="", flush=True)
             # Load user input
-            userinput = sys.stdin.readline().rstrip('\n')
+            #userinput = sys.stdin.readline().rstrip('\n')
+            self.stt.ini_set("disabled","0")
+            userinput = self.stt.listen()
+            self.stt.ini_set("disabled","1")
             # Get first word
             first = userinput.partition(' ')[0]
             if first != userinput:

@@ -1,4 +1,4 @@
-fGrom reactions.reaction import Reaction
+from reactions.reaction import Reaction
 
 class Stt(Reaction):
     ''' Base class for STT. '''
@@ -17,8 +17,9 @@ class Stt(Reaction):
     def listen(self):
         if self.ini.get("disabled") != "1":
             return self.stt_listen()
+        return ""
 
-    def stt_listen():
+    def stt_listen(self):
         pass
 
     def stop(self):

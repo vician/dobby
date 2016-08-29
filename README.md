@@ -75,6 +75,17 @@ make
 
 - Ubuntu: sudo apt install festival-czech
 
+## SST
+
+### sr
+
+- Ubuntu ```
+sudo apt install portaudio19-dev
+git clone http://people.csail.mit.edu/hubert/git/pyaudio.git
+cd pyaudio
+sudo python3 setup.py install
+pip3 install SpeechRecognition
+```
 
 ## Example running
 ```
