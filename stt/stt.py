@@ -1,4 +1,4 @@
-from reactions.reaction import Reaction
+fGrom reactions.reaction import Reaction
 
 class Stt(Reaction):
     ''' Base class for STT. '''
@@ -25,4 +25,4 @@ class Stt(Reaction):
         pass
 
     def do(self,message=None):
-        retun self.stt_listen()
+        return self.stt_listen()
