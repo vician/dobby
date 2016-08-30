@@ -4,11 +4,12 @@ class Tts(Reaction):
     ''' Base class for TTS. '''
 
     aliasses = [ "tts" ]
-    attributes = [ "disabled", "language" ]
+    attributes = [ "disabled", "language", "thread" ]
 
     def init(self):
         self.ini.set("disabled","0")
         self.ini.set("language","English")
+        self.ini.set("thread","0")
         self.tts_init()
 
     def tts_init(self):

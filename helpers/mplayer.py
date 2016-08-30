@@ -14,13 +14,17 @@ class Mplayer():
             args = [ "mplayer", self.audio_file]
             subprocess.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
 
-    def play(self,audio_file):
+    def play(self,audio_file,threading="1"):
         if len(audio_file) > 0:
             self.audio_file = audio_file
-            if threading.active_count() <= 1:
-                self.stop() # Should be disabled for youtube?
-                self.playThread = threading.Thread(target=self.thread)
-                self.playThread.start()
+            if threading == "1":
+                if threading.active_count() <= 1:
+                    self.stop() # Should be disabled for youtube?
+                    self.playThread = threading.Thread(target=self.thread)
+                    self.playThread.start()
+            else:
+                self.stop()
+                self.thread()
 
     def stop(self):
         if self.playThread is not None:

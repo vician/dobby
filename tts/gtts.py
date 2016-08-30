@@ -17,7 +17,7 @@ class Gtts(Tts):
         audio_file = tempfile.mktemp()
         tts = gTTS(text=message, lang=self.language.to_short(self.ini.get("language")))
         tts.save(audio_file)
-        self.mplayer.play(audio_file)
+        self.mplayer.play(audio_file,self.ini.get("thread"))
 
     def stop(self):
         self.mplayer.stop()
