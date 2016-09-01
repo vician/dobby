@@ -41,6 +41,7 @@ class Dobby():
         self.tts = Gtts()
         # STT
         self.stt = SpeechRecognition()
+        #self.stt = None
         # Reactions
         self.load_reaction(Quit())
         self.load_reaction(Config())
@@ -111,10 +112,10 @@ class Dobby():
         while True:
             print ("$ ", end="", flush=True)
             # Load user input
-            #userinput = sys.stdin.readline().rstrip('\n')
-            self.stt.ini_set("disabled","0")
-            userinput = self.stt.listen()
-            self.stt.ini_set("disabled","1")
+            userinput = sys.stdin.readline().rstrip('\n')
+            #self.stt.ini_set("disabled","0")
+            #userinput = self.stt.listen()
+            #self.stt.ini_set("disabled","1")
             # Get first word
             first = userinput.partition(' ')[0]
             if first != userinput:
