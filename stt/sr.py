@@ -9,11 +9,12 @@ class SpeechRecognition(Stt):
 
     def stt_init(self):
         self.r = sr.Recognizer()
+        self.attributes.append("wit")
 
     def stt_listen(self):
         with sr.Microphone() as source:
             audio = self.r.listen(source)
-        WIT_AI_KEY = "R4C2ELA24M2WGZNHQDLQK7HHZHITYKM4" # Wit.ai keys are 32-character uppercase alphanumeric strings
+        WIT_AI_KEY = self.ini.get("wit") # Wit.ai keys are 32-character uppercase alphanumeric strings
         try:
             said = self.r.recognize_wit(audio, key=WIT_AI_KEY)
             print("Wit.ai: " + said)

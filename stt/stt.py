@@ -4,7 +4,7 @@ class Stt(Reaction):
     ''' Base class for STT. '''
 
     aliasses = [ "stt" ]
-    attributes = [ "disabled", "language" ]
+    attributes = [ "disabled", "language", "called" ]
 
     def init(self):
         self.ini.set("disabled","0")
@@ -16,7 +16,10 @@ class Stt(Reaction):
 
     def listen(self):
         if self.ini.get("disabled") != "1":
-            return self.stt_listen()
+            message = self.stt_listen()
+            first = message.partition(' ')[0]
+            if message == self.ini.get("called"):
+                return message.split(' ', 1)[1]
         return ""
 
     def stt_listen(self):
