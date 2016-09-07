@@ -141,6 +141,6 @@ class Dobby():
                     # Cleverbot is default
                     self.say(self.cleverbot.do(userinput))
 
-
-dobby = Dobby()
-dobby.listen()
+if __name__ == '__main__':
+    dobby = Dobby()
+    dobby.listen()
